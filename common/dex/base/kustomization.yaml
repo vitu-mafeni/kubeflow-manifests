@@ -4,17 +4,17 @@ namespace: auth
 
 resources:
 - namespace.yaml
-- config-map.yaml
+# - config-map.yaml
 - crds.yaml
 - deployment.yaml
 - service.yaml
-- dex-passwords.yaml
+# - dex-passwords.yaml
 
-generatorOptions:
-  disableNameSuffixHash: true
+# generatorOptions:
+#   disableNameSuffixHash: true
 
-secretGenerator:
-- name: dex-oidc-client
-  type: Opaque
-  envs:
-  - secret_params.env
+# secretGenerator:
+# - name: dex-oidc-client
+#   type: Opaque
+#   envs:
+#   - secret_params.env
