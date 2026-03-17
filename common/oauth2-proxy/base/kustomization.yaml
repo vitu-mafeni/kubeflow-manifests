@@ -9,6 +9,8 @@ resources:
 - serviceaccount.yaml
 - service.yaml
 - virtualservice.yaml
+- oauth2-proxy-theme.yaml
+- oauth2-proxy-parameters.yaml
 
 # secretGenerator:
 # - name: oauth2-proxy
@@ -23,38 +25,38 @@ resources:
 #   files:
 #   - oauth2_proxy.cfg
 
-- name: oauth2-proxy-theme
-  files:
-  - kubeflow-logo.svg
+# - name: oauth2-proxy-theme
+#   files:
+#   - kubeflow-logo.svg
 
-- name: oauth2-proxy-parameters
-  literals:
-  # This will configure oauth2-proxy option --cookie-secure which can force
-  # auth redirect with redirect_uri parameter using https.
-  - FORCE_HTTPS=false
+# - name: oauth2-proxy-parameters
+#   literals:
+#   # This will configure oauth2-proxy option --cookie-secure which can force
+#   # auth redirect with redirect_uri parameter using https.
+#   - FORCE_HTTPS=false
 
-  # If Kubernetes is managed by kind, vCluster, minikube or similar tool,
-  # most probably the Kubernetes OIDC Issuer will be server in-cluster
-  # behind self-signed certs. This option will configure
-  # --ssl-insecure-skip-verify which will accept self-signed-certificates.
-  - ALLOW_SELF_SIGNED_ISSUER=true
+#   # If Kubernetes is managed by kind, vCluster, minikube or similar tool,
+#   # most probably the Kubernetes OIDC Issuer will be server in-cluster
+#   # behind self-signed certs. This option will configure
+#   # --ssl-insecure-skip-verify which will accept self-signed-certificates.
+#   - ALLOW_SELF_SIGNED_ISSUER=true
 
-  # This will configure oauth2-proxy option --skip-jwt-bearer-tokens which
-  # will pass the requests with 'Authorization' header with Bearer Token
-  # matching --extra-jwt-issuers.
-  - ENABLE_M2M_TOKENS=true
+#   # This will configure oauth2-proxy option --skip-jwt-bearer-tokens which
+#   # will pass the requests with 'Authorization' header with Bearer Token
+#   # matching --extra-jwt-issuers.
+#   - ENABLE_M2M_TOKENS=true
 
-  # Bearer tokens issued by these OIDC Issuers will be verified against the
-  # Issuer and accepted on success.
-  # The format is exactly like in --extra-jwt-issuers.
-  # If extra jwt issuers are meant to be used with m2m bearer tokens,
-  # each issuer has to be added with RequestAuthentication so Istio can
-  # verify, trust and use the JWT. See
-  # 'common/oauth2-proxy/components/istio-m2m' for details.
-  # Examples:
-  # - EXTRA_JWT_ISSUERS=https://kubernetes.default.svc.cluster.local=https://kubernetes.default.svc.cluster.local
-  # - EXTRA_JWT_ISSUERS=https://oidc.eks.region.amazonaws.com/id/1234abcd=https://kubernetes.default.svc
-  - EXTRA_JWT_ISSUERS=
+#   # Bearer tokens issued by these OIDC Issuers will be verified against the
+#   # Issuer and accepted on success.
+#   # The format is exactly like in --extra-jwt-issuers.
+#   # If extra jwt issuers are meant to be used with m2m bearer tokens,
+#   # each issuer has to be added with RequestAuthentication so Istio can
+#   # verify, trust and use the JWT. See
+#   # 'common/oauth2-proxy/components/istio-m2m' for details.
+#   # Examples:
+#   # - EXTRA_JWT_ISSUERS=https://kubernetes.default.svc.cluster.local=https://kubernetes.default.svc.cluster.local
+#   # - EXTRA_JWT_ISSUERS=https://oidc.eks.region.amazonaws.com/id/1234abcd=https://kubernetes.default.svc
+#   - EXTRA_JWT_ISSUERS=
 
 replacements:
 - source:
