@@ -20,7 +20,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: centraldashboard
-        image: ghcr.io/kubeflow/kubeflow/central-dashboard
+        image: docker.io/loihoangthanh1411/centraldashboard:2.4.3
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
